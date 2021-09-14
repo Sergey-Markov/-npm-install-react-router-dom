@@ -1,15 +1,15 @@
-import PropTypes from 'prop-types';
-import { Component } from 'react';
+import PropTypes from "prop-types";
+import { Component } from "react";
 
 export default class Modal extends Component {
   componentDidMount = () => {
     const { onCloseModal } = this.props;
-    window.addEventListener('keydown', onCloseModal);
+    window.addEventListener("keydown", onCloseModal);
   };
 
   componentWillUnmount = () => {
     const { onCloseModal } = this.props;
-    window.removeEventListener('keydown', onCloseModal);
+    window.removeEventListener("keydown", onCloseModal);
   };
 
   render() {
