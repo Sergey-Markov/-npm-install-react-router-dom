@@ -1,37 +1,35 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-export default class Searchbar extends Component {
-  state = {
-    imageName: '',
-  };
+export default function Searchbar ({onSubmit}) {
+  
 
-  resset() {
-    this.setState({ imageName: '' });
+  const [imageName, setImageName] = useState('')
+
+  function resset() {
+    setImageName( '' );
   }
 
-  hadleAddInputValue = e => {
-    this.setState({ imageName: e.currentTarget.value.toLowerCase().trim() });
+  const hadleAddInputValue = e => {
+    setImageName( e.currentTarget.value.toLowerCase().trim());
   };
-  handleSubmit = e => {
-    const { imageName } = this.state;
+  const handleSubmit = e => {
     e.preventDefault();
-    this.props.onSubmit(imageName);
-    this.resset();
+    onSubmit(imageName);
+    resset();
   };
 
-  render() {
-    const { imageName } = this.state;
+  
 
-    return (
+  return (
       <header className="Searchbar">
-        <form className="SearchForm" onSubmit={this.handleSubmit}>
+        <form className="SearchForm" onSubmit={handleSubmit}>
           <button type="submit" className="SearchForm-button">
             <span className="SearchForm-button-label">Search</span>
           </button>
 
           <input
-            onChange={this.hadleAddInputValue}
+            onChange={hadleAddInputValue}
             name="imageName"
             className="SearchForm-input"
             type="text"
@@ -43,7 +41,7 @@ export default class Searchbar extends Component {
         </form>
       </header>
     );
-  }
+  
 }
 
 Searchbar.propTypes = {
