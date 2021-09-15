@@ -1,19 +1,14 @@
 import PropTypes from "prop-types";
-import { Component } from "react";
+import { useEffect } from "react";
 
-export default class Modal extends Component {
-  componentDidMount = () => {
-    const { onCloseModal } = this.props;
-    window.addEventListener("keydown", onCloseModal);
-  };
+export default function Modal ({picture,onCloseModal, statusModal}) {
 
-  componentWillUnmount = () => {
-    const { onCloseModal } = this.props;
-    window.removeEventListener("keydown", onCloseModal);
-  };
+  useEffect(() => {
+    if(statusModal) window.addEventListener("keydown", onCloseModal);
+    if(!statusModal)window.removeEventListener("keydown", onCloseModal);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [statusModal]);
 
-  render() {
-    const { picture, onCloseModal } = this.props;
     return (
       <div className="Overlay" onClick={onCloseModal}>
         <div className="Modal">
@@ -21,10 +16,11 @@ export default class Modal extends Component {
         </div>
       </div>
     );
-  }
+  
 }
 
 Modal.propTypes = {
   picture: PropTypes.object.isRequired,
   onCloseModal: PropTypes.func,
+  statusModal:PropTypes.bool.isRequired,
 };

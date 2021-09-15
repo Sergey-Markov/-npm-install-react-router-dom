@@ -130,7 +130,7 @@ export default function ImageGallery({ imageName }) {
         <ul className="ImageGallery">
           <ImageGalleryItem pictures={picturesData} onClick={onModalOpen} />
         </ul>
-        {isOpenModal && <Modal picture={picture} onCloseModal={onCloseModal} />}
+        {isOpenModal && <Modal statusModal={isOpenModal} picture={picture} onCloseModal={onCloseModal} />}
         {picturesData.length > 0 && <Button onClick={nextPage} />}
       </>
     );
